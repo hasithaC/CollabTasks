@@ -5,6 +5,8 @@ import { persistor, store } from "@/store/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import Content from "./content";
+import "../gesture-handler";
+import StackNavigator from "@/navigations/StackNavigator";
 
 const index = () => {
   useEffect(() => {
@@ -15,7 +17,7 @@ const index = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <View
+        {/* <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
           <Pressable
@@ -71,7 +73,8 @@ const index = () => {
             <Text>Get User Data</Text>
           </Pressable>
           <Content/>
-        </View>
+        </View> */}
+        <StackNavigator />
       </PersistGate>
     </Provider>
   );
