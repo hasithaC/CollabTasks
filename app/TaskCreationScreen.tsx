@@ -5,11 +5,12 @@ import BackButton from "@/components/buttons/BackButton";
 import { useRouter } from "expo-router";
 import PrimaryTextInput from "@/components/inputs/PrimaryTextInput";
 import { createTask, fetchUsers } from "@/services/dbService";
-import { FetchedUser, User } from "@/models";
+import { FetchedUser, TaskPriority, User } from "@/models";
 import PrimaryDropdown from "@/components/inputs/PrimaryDropdown";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import { TextAa, TextAlignLeft, UserCircleCheck } from "phosphor-react-native";
 import { useSelector } from "react-redux";
+import HorizontalRadioGroup from "@/components/buttons/HorizontalRadioGroup";
 
 const TaskCreationScreen = () => {
   const router = useRouter();
@@ -18,6 +19,7 @@ const TaskCreationScreen = () => {
   const [selectedUserId, setSelectedUserId] = useState<string>("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [taskPriority, setTaskPriority] = useState<TaskPriority>("medium");
 
   const user: User = useSelector((state: any) => state.sessionReducer.user);
 
@@ -56,6 +58,7 @@ const TaskCreationScreen = () => {
       description: description,
       assigneeId: selectedUserId,
       creatorId: user.id,
+      priority: taskPriority,
     });
 
     if (error) {
@@ -100,6 +103,14 @@ const TaskCreationScreen = () => {
           options={userOptions}
           placeholder="Select an assignee"
           LeftIcon={UserCircleCheck}
+        />
+        <HorizontalRadioGroup
+          label="Task Priority"
+          options={["low", "medium", "high"]}
+          selected={taskPriority}
+          onChange={(value) => {
+            setTaskPriority(value as TaskPriority);
+          }}
         />
       </View>
 

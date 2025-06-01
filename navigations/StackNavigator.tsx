@@ -9,6 +9,7 @@ import SignUpScreen from "@/app/SignUpScreen";
 import { User } from "@/models";
 import { Text, View } from "react-native";
 import TaskCreationScreen from "@/app/TaskCreationScreen";
+import TaskDetailsScreen from "@/app/TaskDetailsScreen";
 
 const StackNavigator = () => {
   const user: User = useSelector((state: any) => state.sessionReducer.user);
@@ -38,11 +39,12 @@ const StackNavigator = () => {
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen name="TaskCreation" component={TaskCreationScreen} />
+      <Stack.Screen name="TaskDetails" component={TaskDetailsScreen} />
     </Stack.Navigator>
   );
 
   return (
-    <View style={{ flex: 1, width: '100%' }}>
+    <View style={{ flex: 1, width: "100%" }}>
       <Text>{user?.role}</Text>
       {user?.role === "authenticated" ? <AppStack /> : <AuthStack />}
     </View>

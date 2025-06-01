@@ -17,7 +17,7 @@ export const theme = {
   backgrounds: {
     white: "#FFFFFF",
     lightGray: "#F3F4F6", // Optional: for subtle UI backgrounds
-    dark: "#1F2937",       // Match with colors.dark
+    dark: "#1F2937", // Match with colors.dark
   },
   fonts: {
     family: {
@@ -30,7 +30,7 @@ export const theme = {
       extraBold: "800" as "800",
     },
     size: {
-      title: 32,
+      title: 24,
       header: 20,
       subHeader: 18,
       body: 16,
@@ -39,11 +39,23 @@ export const theme = {
     },
   },
   radius: {
+    xxs: 6,
     xs: 10,
     sm: 12,
     md: 14,
     lg: 16,
     xl: 18,
     xxl: 22,
+  },
+  statusColors: {
+    priority: {
+      low: "#4CAF50",
+      medium: "#FF9800",
+      high: "#F44336",
+    },
+    taskStatus: {
+      pending: "#90A4AE",
+      completed: "#2196F3",
+    },
   },
 };

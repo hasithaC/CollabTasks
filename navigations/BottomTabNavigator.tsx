@@ -46,6 +46,7 @@ const BottomTabNavigator = () => {
         },
         sceneStyle: {
           backgroundColor: theme.backgrounds.white,
+          paddingTop: 20,
         },
         tabBarActiveTintColor: theme.colors.primary,
         tabBarInactiveTintColor: theme.colors.gray,
