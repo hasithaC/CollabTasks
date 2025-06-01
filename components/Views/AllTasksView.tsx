@@ -107,6 +107,7 @@ const AllTasksView = () => {
       data={tasks}
       keyExtractor={(item) => item.id.toString()}
       renderItem={renderTaskItem}
+      showsVerticalScrollIndicator={false}
     />
   );
 };

@@ -58,4 +58,7 @@ export const theme = {
       completed: "#2196F3",
     },
   },
+  images: {
+    welcomePlaceholderImage: require("../assets/images/welcomeplaceholderimage.png"),
+  },
 };

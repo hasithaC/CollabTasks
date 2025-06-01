@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase";
-import { CreateTaskInput, Task, Comment, FilterOptions } from "@/models";
+import { CreateTaskInput, Task, Comment, FilterOptions, User } from "@/models";
 
 export const fetchUsers = async () => {
   const { data, error } = await supabase
@@ -82,8 +82,8 @@ export const addCommentToTask = async ({
         creator_id: creatorId,
       },
     ])
-    .select()
-    .single();
+    .select(`id, content, created_at, creator:creator_id(id, name, email)`)
+    .single(); // ensures creator is NOT an array
 
   if (error) {
     console.error("Error adding comment:", error.message);
@@ -200,4 +200,18 @@ export const getFilteredTasks = async ({ priority, status }: FilterOptions): Pro
   }
 
   return data as Task[];
+};
+
+export const getUserById = async (userId: string): Promise<User | null> => {
+  const { data, error } = await supabase
+    .from("users")
+    .select("id, name, email, created_at")
+    .eq("id", userId)
+    .single();
+
+  if (error) {
+    console.error("Error fetching user by ID:", error.message);
+    return null;
+  }
+  return data;
 };

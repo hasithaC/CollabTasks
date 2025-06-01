@@ -1,12 +1,17 @@
-import { SET_ALL_TASK, SET_LOADING, SET_USER } from "@/actions/type";
+import {
+  SET_ALL_TASK,
+  SET_LOADING,
+  SET_USER,
+  SET_USER_RECORD,
+} from "@/actions/type";
 import createReducer from "@/lib/createReducer";
 import { Task, User } from "@/models";
 
 const sessioInitialState = {
   user: null,
   allTasks: [],
+  userRecord: null,
 };
-
 const commonInitialState = {
   isLoading: false,
 };
@@ -22,6 +27,12 @@ export const sessionReducer = createReducer(sessioInitialState, {
     return {
       ...state,
       allTasks: action.payload,
+    };
+  },
+  [SET_USER_RECORD](state: any, action: { payload: User }) {
+    return {
+      ...state,
+      userRecord: action.payload,
     };
   },
 });

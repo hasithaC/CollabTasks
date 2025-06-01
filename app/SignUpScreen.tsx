@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import { theme } from "@/constants/theme";
 import BackButton from "@/components/buttons/BackButton";
@@ -9,6 +9,7 @@ import PrimaryButton from "@/components/buttons/PrimaryButton";
 import { supabase } from "@/lib/supabase";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/actions/action";
+import { signUpUser } from "@/services/authService";
 
 const SignUpScreen = () => {
   const router = useRouter();
@@ -17,6 +18,17 @@ const SignUpScreen = () => {
   const [name, setName] = useState("");
 
   const dispatch = useDispatch();
+
+  const handleSignUp = async () => {
+    const { data, error } = await signUpUser(email, password, name);
+
+    if (error) {
+      Alert.alert("Signup Failed", error.message);
+    } else {
+      dispatch(setUser(data.user));
+      router.navigate("/HomeScreen");
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -61,15 +73,7 @@ const SignUpScreen = () => {
           title="Sign up"
           style={styles.primaryButton}
           onPress={async () => {
-            const { data, error } = await supabase.auth.signUp({
-              email,
-              password,
-              options: {
-                data: { name },
-              },
-            });
-
-            dispatch(setUser(data.user));
+            handleSignUp()
           }}
         />
 

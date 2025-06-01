@@ -1,7 +1,7 @@
 import { FetchedUser } from "./FetchedUser";
 
 export interface Comment {
-  id: number;
+   id: number;
   content: string;
   created_at: string;
   creator?: {

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { theme } from "@/constants/theme";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
@@ -9,7 +9,13 @@ const WelcomeScreen = () => {
   const router = useRouter();
   return (
     <View style={styles.container}>
-      <View style={{ flex: 1 }}></View>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Image
+          source={theme.images.welcomePlaceholderImage}
+          resizeMode="contain"
+          style={{ height: 400, aspectRatio: 1 }}
+        />
+      </View>
 
       <PrimaryButton
         title="Getting Started"

@@ -69,6 +69,7 @@ const TaskDetailsScreen = () => {
         taskId: parsedTask.id,
         creatorId: user.id,
       });
+      console.log("Commont Data",newComment)
       setCommentList((prev) => [...prev, newComment as Comment]);
       setComment("");
       Alert.alert("Success", "Comment added!");

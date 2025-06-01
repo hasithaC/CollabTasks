@@ -17,22 +17,21 @@ const LoginScreen = () => {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    dispatch(setLoading(true))
+    dispatch(setLoading(true));
     const { user, error } = await signInUser(email, password);
 
     if (error) {
       Alert.alert("Login Failed", error.message);
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
       return;
     }
 
-
     if (user) {
       dispatch(setUser(user));
-      dispatch(setLoading(true))
-      console.log("Logged in user:", user);
+      dispatch(setLoading(true));
+      router.replace("/HomeScreen");
     } else {
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
       console.warn("No user object found in login response.");
     }
   };

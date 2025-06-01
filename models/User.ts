@@ -5,6 +5,6 @@ export interface User {
   phone?: string
   role?: string
   lastSignInAt?: string
-  createdAt?: string
+  createdAt: string
   updatedAt?: string
 }

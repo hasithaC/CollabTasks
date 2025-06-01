@@ -14,10 +14,6 @@ import TaskDetailsScreen from "@/app/TaskDetailsScreen";
 const StackNavigator = () => {
   const user: User = useSelector((state: any) => state.sessionReducer.user);
 
-  useEffect(() => {
-    console.log("hohowe fiow ehoiwe");
-  }, [user]);
-
   const Stack = createStackNavigator();
 
   const AuthStack = () => (
@@ -45,7 +41,6 @@ const StackNavigator = () => {
 
   return (
     <View style={{ flex: 1, width: "100%" }}>
-      <Text>{user?.role}</Text>
       {user?.role === "authenticated" ? <AppStack /> : <AuthStack />}
     </View>
   );

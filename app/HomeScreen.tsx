@@ -6,13 +6,14 @@ import {
   Faders,
   PaperPlaneRight,
   PlusCircle,
+  Power,
   User,
   UserCircle,
   XCircle,
 } from "phosphor-react-native";
 import { signOutUser } from "@/services/authService";
 import { useDispatch } from "react-redux";
-import { setAllTask, setUser } from "@/actions/action";
+import { setAllTask, setUser, setUserRecord } from "@/actions/action";
 import { useRouter } from "expo-router";
 import HorizontalRadioGroup from "@/components/buttons/HorizontalRadioGroup";
 import { TaskPriority, TaskStatus } from "@/models";
@@ -27,10 +28,13 @@ const HomeScreen = () => {
   const handleSignOut = async () => {
     const { error } = await signOutUser();
     if (error) {
-      console.error("Sign-out error:", error);
       Alert.alert("Error", "Failed to sign out. Please try again.");
     } else {
       dispatch(setUser(null));
+      dispatch(setUserRecord(null));
+      dispatch(setAllTask([]));
+
+      router.replace("/WelcomeScreen");
       Alert.alert("Success", "Signed out successfully.");
     }
   };
@@ -78,7 +82,7 @@ const HomeScreen = () => {
           style={styles.headerTouchable}
           onPress={handleSignOut}
         >
-          <UserCircle size={32} color={theme.colors.dark} />
+          <Power size={32} color={theme.colors.dark} />
         </TouchableOpacity>
       </View>
 
