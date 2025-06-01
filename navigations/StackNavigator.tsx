@@ -8,6 +8,7 @@ import ProfileScreen from "@/app/ProfileScreen";
 import SignUpScreen from "@/app/SignUpScreen";
 import { User } from "@/models";
 import { Text, View } from "react-native";
+import TaskCreationScreen from "@/app/TaskCreationScreen";
 
 const StackNavigator = () => {
   const user: User = useSelector((state: any) => state.sessionReducer.user);
@@ -36,6 +37,7 @@ const StackNavigator = () => {
     >
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="TaskCreation" component={TaskCreationScreen} />
     </Stack.Navigator>
   );
 

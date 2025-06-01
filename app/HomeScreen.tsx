@@ -6,9 +6,11 @@ import { PlusCircle, User, UserCircle } from "phosphor-react-native";
 import { signOutUser } from "@/services/authService";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/actions/action";
+import { useRouter } from "expo-router";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const handleSignOut = async () => {
     const { error } = await signOutUser();
     if (error) {
@@ -24,7 +26,12 @@ const HomeScreen = () => {
       <View style={styles.header}>
         <Text style={styles.headerText}>Collab Task</Text>
 
-        <TouchableOpacity style={styles.headerTouchable}>
+        <TouchableOpacity
+          style={styles.headerTouchable}
+          onPress={() => {
+            router.navigate("/TaskCreationScreen");
+          }}
+        >
           <PlusCircle size={32} color={theme.colors.dark} />
         </TouchableOpacity>
 
