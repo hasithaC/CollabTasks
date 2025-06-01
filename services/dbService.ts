@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase";
-import { CreateTaskInput, Task, Comment } from "@/models";
+import { CreateTaskInput, Task, Comment, FilterOptions } from "@/models";
 
 export const fetchUsers = async () => {
   const { data, error } = await supabase
@@ -165,4 +165,39 @@ export const updateTaskStatus = async (
   }
 
   return data;
+};
+
+export const getFilteredTasks = async ({ priority, status }: FilterOptions): Promise<Task[]> => {
+  let query = supabase
+    .from("tasks")
+    .select(
+      `
+      id,
+      title,
+      description,
+      priority,
+      status,
+      created_at,
+      creator:creator_id(id, name, email),
+      assignee:assignee_id(id, name, email)
+      `
+    )
+    .order("created_at", { ascending: false });
+
+  if (priority) {
+    query = query.eq("priority", priority);
+  }
+
+  if (status) {
+    query = query.eq("status", status);
+  }
+
+  const { data, error } = await query;
+
+  if (error) {
+    console.error("Error fetching tasks:", error.message);
+    throw new Error(error.message);
+  }
+
+  return data as Task[];
 };

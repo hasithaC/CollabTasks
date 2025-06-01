@@ -6,7 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { fetchTasks } from "@/services/dbService";
+import { fetchTasks, getFilteredTasks } from "@/services/dbService";
 import { theme } from "@/constants/theme";
 import { Task, User } from "@/models";
 import { useDispatch, useSelector } from "react-redux";
