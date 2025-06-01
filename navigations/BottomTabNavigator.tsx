@@ -1,14 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import AssignedTasksView from "@/components/Views/AssignedTasksView";
-import CreatedTasksView from "@/components/Views/CreatedTasksView";
-import AllTasksView from "@/components/Views/AllTasksView";
-import {
-  ClipboardText,
-  PencilSimple,
-  ListChecks,
-} from "phosphor-react-native";
+import AssignedTasksView from "@/components/views/AssignedTasksView";
+import CreatedTasksView from "@/components/views/CreatedTasksView";
+import AllTasksView from "@/components/views/AllTasksView";
+import { ClipboardText, PencilSimple, ListChecks } from "phosphor-react-native";
+import { theme } from "@/constants/theme";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,17 +17,38 @@ const BottomTabNavigator = () => {
           const iconSize = focused ? 26 : 22;
           switch (route.name) {
             case "Assigned":
-              return <ClipboardText size={iconSize} color={color} weight={focused ? "fill" : "regular"} />;
+              return (
+                <ClipboardText
+                  size={iconSize}
+                  color={color}
+                  weight={focused ? "fill" : "regular"}
+                />
+              );
             case "Created":
-              return <PencilSimple size={iconSize} color={color} weight={focused ? "fill" : "regular"} />;
+              return (
+                <PencilSimple
+                  size={iconSize}
+                  color={color}
+                  weight={focused ? "fill" : "regular"}
+                />
+              );
             case "All":
-              return <ListChecks size={iconSize} color={color} weight={focused ? "fill" : "regular"} />;
+              return (
+                <ListChecks
+                  size={iconSize}
+                  color={color}
+                  weight={focused ? "fill" : "regular"}
+                />
+              );
             default:
               return null;
           }
         },
-        tabBarActiveTintColor: "#007AFF",
-        tabBarInactiveTintColor: "#8E8E93",
+        sceneStyle: {
+          backgroundColor: theme.backgrounds.white,
+        },
+        tabBarActiveTintColor: theme.colors.primary,
+        tabBarInactiveTintColor: theme.colors.gray,
         tabBarStyle: styles.tabBar,
         headerShown: false,
       })}

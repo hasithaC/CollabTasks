@@ -1,23 +1,44 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React, { useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { persistor, store } from "@/store/store";
-import { Provider } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import Content from "./content";
 import "../gesture-handler";
 import StackNavigator from "@/navigations/StackNavigator";
+import { theme } from "@/constants/theme";
 
 const index = () => {
-  useEffect(() => {
-    supabase.auth.onAuthStateChange((_event, session) => {
-      console.log("session user", session?.user);
-    });
-  }, []);
+  // useEffect(() => {
+  //   supabase.auth.onAuthStateChange((_event, session) => {
+  //     console.log("session user", session?.user);
+  //   });
+  // }, []);
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state: any) => state.commonReducer.isLoading);
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        {/* <View
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+      }}
+    >
+      {isLoading ? (
+        <ActivityIndicator size="large" color={theme.colors.primary} />
+      ) : (
+        <StackNavigator />
+      )}
+    </View>
+
+    /* <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
           <Pressable
@@ -73,10 +94,7 @@ const index = () => {
             <Text>Get User Data</Text>
           </Pressable>
           <Content/>
-        </View> */}
-        <StackNavigator />
-      </PersistGate>
-    </Provider>
+        </View> */
   );
 };
 

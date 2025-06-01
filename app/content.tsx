@@ -5,7 +5,7 @@ import { setUser } from '@/actions/action';
 
 const Content = () => {
     const user = useSelector(
-    (state: any) => state.commonReducer.user,
+    (state: any) => state.sessionReducer.user,
   );
   const dispatch = useDispatch()
   return (
